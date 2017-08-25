@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:/properties/settings${argExecuteEnvironment}.properties</value>
+        <value>classpath:/properties/db${argExecuteEnvironment}.properties</value>
+      </list>
+    </property>
+    <property name="searchSystemEnvironment" value="true"/>
+    <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+  </bean>
+
+
+  <bean id="settings" class="news360.automation.Settings">
+  	<property name="inputDirectory" value="${input-directory}"/>
+  	<property name="outputDirectory" value="${output-directory}"/>
+  	<property name="webDriverFactory" ref="webDriverFactory"/>
+ 	  </bean>
+
+  <bean id="webDriverFactory" class="new360.automation.WebDriverFactory">
+    <property name="browserType" value="${browser-type}"/>
+    <property name="iphoneAddress" value="${iphoneAddress}"/>
+    <property name="chromePath" value="${chrome-path}"/>
+    <property name="userAgent" value="${user-agent}"/>
+  </bean>
+</beans>
+
+
